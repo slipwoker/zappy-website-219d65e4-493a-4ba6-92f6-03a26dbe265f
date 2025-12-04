@@ -31,8 +31,6 @@
   align-items: center;
   justify-content: center;
   min-height: 21px;
-  direction: ltr !important;
-  unicode-bidi: isolate;
 }
 
     .zappy-header p {
@@ -45,7 +43,6 @@
       display: inline-block;
       vertical-align: baseline;
       margin-bottom: 0 !important;
-      direction: ltr !important;
     }
 
 .zappy-header .zappy-link {
@@ -486,11 +483,7 @@
       if (data.showAttribution) {
         var header = document.getElementById('zappy-attribution-header');
         if (header) {
-          // Use dynamic announcement content if available
-          if (data.announcement && data.announcement.html) {
-            header.innerHTML = data.announcement.html;
-          }
-          header.style.display = 'flex';
+          header.style.display = 'block';
         }
       }
     })
