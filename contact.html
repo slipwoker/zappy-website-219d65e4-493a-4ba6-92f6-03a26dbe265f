@@ -31,6 +31,8 @@
   align-items: center;
   justify-content: center;
   min-height: 21px;
+  direction: ltr !important;
+  unicode-bidi: isolate;
 }
 
     .zappy-header p {
@@ -43,6 +45,7 @@
       display: inline-block;
       vertical-align: baseline;
       margin-bottom: 0 !important;
+      direction: ltr !important;
     }
 
 .zappy-header .zappy-link {
@@ -68,7 +71,7 @@
   // Configuration
   var config = {
     websiteId: '219d65e4-493a-4ba6-92f6-03a26dbe265f',
-    apiUrl: 'https://qaapi.zappy5.com/api/analytics/track',
+    apiUrl: 'http://localhost:5001/api/analytics/track',
     sessionDuration: 30 * 60 * 1000, // 30 minutes
     visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
     trackPageViews: true,
@@ -504,7 +507,11 @@
       if (data.showAttribution) {
         var header = document.getElementById('zappy-attribution-header');
         if (header) {
-          header.style.display = 'block';
+          // Use dynamic announcement content if available
+          if (data.announcement && data.announcement.html) {
+            header.innerHTML = data.announcement.html;
+          }
+          header.style.display = 'flex';
         }
       }
     })
