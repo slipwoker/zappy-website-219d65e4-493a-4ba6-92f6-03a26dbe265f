@@ -610,3 +610,128 @@ body.accessibility-widget-visible ._access-menu {
     display: none !important;
   }
 }
+
+
+/* Hero Video Background Styles */
+.hero-video-background {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  z-index: 0 !important;
+  pointer-events: auto;
+}
+
+.hero-video-background .hero-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-video-background .hero-video {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  transform: translate(-50%, -50%) !important;
+  object-fit: cover !important;
+  z-index: 0 !important;
+}
+
+.hero-video-background .hero-video-iframe {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 100vw !important;
+  height: 56.25vw !important; /* 16:9 aspect ratio */
+  min-height: 100% !important;
+  min-width: 177.78vh !important; /* 16:9 aspect ratio */
+  transform: translate(-50%, -50%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+.hero-video-background .hero-video-fallback {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Hidden original hero image and its container */
+.hero-original-image-hidden {
+  display: none !important;
+}
+
+/* When hero has video background, center all content */
+.hero-section:has(.hero-video-background),
+[class*="hero"]:has(.hero-video-background) {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Content wrapper in hero with video should be centered */
+.hero-section:has(.hero-video-background) > *:not(.hero-video-background):not(.zappy-section-controls):not([class*="zappy-"]):not([data-zappy-internal]),
+[class*="hero"]:has(.hero-video-background) > *:not(.hero-video-background):not(.zappy-section-controls):not([class*="zappy-"]):not([data-zappy-internal]) {
+  text-align: center !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Ensure Zappy UI controls are NOT affected by hero video centering */
+.zappy-section-controls,
+.zappy-grid-toolbar,
+.zappy-item-controls-bar,
+[data-zappy-internal] {
+  text-align: initial !important;
+  width: auto !important;
+  max-width: none !important;
+  padding: initial !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  position: absolute !important;
+}
+
+/* Fallback for browsers/devices that don't support video */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video-background .hero-video,
+  .hero-video-background .hero-video-iframe {
+    display: none;
+  }
+  .hero-video-background .hero-video-fallback {
+    display: block;
+  }
+}
+
+/* Hero content should be above the video */
+.hero-section > *:not(.hero-video-background),
+[class*="hero"] > *:not(.hero-video-background) {
+  position: relative;
+  z-index: 2;
+}
